@@ -6,11 +6,11 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y; \
     apt-get clean
 
-# Download & install BLAST
+# Download & install Diamond
 
-  && curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+-x64-linux.tar.gz \
-  && tar -C /opt/blast -zxf ncbi-blast-2.9.0+-x64-linux.tar.gz \
-  && rm ncbi-blast-2.9.0+-x64-linux.tar.gz
+ RUN mkdir /opt/diamond \
+  && wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz \
+  && tar -C /opt/diamond -zxf diamond-linux64.tar.gz \
+  && rm diamond-linux64.tar.gz
 
-  ENV PATH /opt/blast/bin:$PATH
-  
+ ENV PATH /opt/diamond:$PATH
