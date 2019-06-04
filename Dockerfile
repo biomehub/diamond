@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:latest
 MAINTAINER lfelipedeoliveira, felipe@lfelipedeoliveira.com
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -8,12 +8,9 @@ RUN apt-get update -y; \
 
 # Download & install BLAST
 
- RUN mkdir /opt/diamond \
-  && wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz \
-  && tar -C /opt/diamond -zxf diamond-linux64.tar.gz \
-  && rm diamond-linux64.tar.gz
+  && curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+-x64-linux.tar.gz \
+  && tar -C /opt/blast -zxf ncbi-blast-2.9.0+-x64-linux.tar.gz \
+  && rm ncbi-blast-2.9.0+-x64-linux.tar.gz
 
- ENV PATH /opt/diamond:$PATH
-
-# set default behaviour
-#WORKDIR /opt/diamond
+  ENV PATH /opt/blast/bin:$PATH
+  
